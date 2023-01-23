@@ -1,6 +1,7 @@
 package de.kxmischesdomi.morebannerfeatures.renderer.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import de.kxmischesdomi.morebannerfeatures.core.config.MBFConfigManager;
 import de.kxmischesdomi.morebannerfeatures.core.config.options.IOption;
 import net.minecraft.client.Minecraft;
@@ -12,9 +13,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.util.FormattedCharSequence;
-
-import java.util.List;
 
 /**
  * @author KxmischesDomi | https://github.com/kxmischesdomi
@@ -35,10 +33,10 @@ public class MBFOptionsScreen extends OptionsSubScreen {
 		this.buttonList = new OptionsList(this.minecraft, this.width, this.height, 32, this.height - 32, 25);
 		this.buttonList.addSmall(getAllToDisplay());
 		this.addWidget(this.buttonList);
-		this.addRenderableWidget(new Button(this.width / 2 - 100, this.height - 27, 200, 20, CommonComponents.GUI_DONE, (button) -> {
-			MBFConfigManager.save();
-			this.minecraft.setScreen(this.previous);
-		}));
+                addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, (button) -> {
+                    MBFConfigManager.save();
+                    this.minecraft.setScreen(this.previous);
+                }).bounds(this.width / 2 - 100, this.height - 27, 200, 20).build());
 	}
 
 	public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
@@ -46,10 +44,6 @@ public class MBFOptionsScreen extends OptionsSubScreen {
 		this.buttonList.render(matrices, mouseX, mouseY, delta);
 		drawCenteredString(matrices, this.font, this.title, this.width / 2, 5, 0xffffff);
 		super.render(matrices, mouseX, mouseY, delta);
-		List<FormattedCharSequence> tooltip = tooltipAt(this.buttonList, mouseX, mouseY);
-		if (tooltip != null) {
-			this.renderTooltip(matrices, tooltip, mouseX, mouseY);
-		}
 
 	}
 

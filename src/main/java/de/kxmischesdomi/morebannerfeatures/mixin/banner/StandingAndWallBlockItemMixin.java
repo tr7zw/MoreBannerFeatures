@@ -32,27 +32,27 @@ public abstract class StandingAndWallBlockItemMixin extends BlockItem {
 		super(block, settings);
 	}
 
-	@Inject(method = "getPlacementState", locals = LocalCapture.CAPTURE_FAILSOFT, at = @At(value = "FIELD", target = "Lnet/minecraft/core/Direction;UP:Lnet/minecraft/core/Direction;"), cancellable = true)
-	private void getPlacementState(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir, BlockState blockState, LevelReader worldView, BlockPos blockPos, Direction[] directions, int i, int i1) {
-
-		if (!MBFOptions.HANGING_BANNERS.getBooleanValue()) {
-			return;
-		}
-
-		Direction direction = directions[i1];
-		if (direction != Direction.UP) return;
-
-		StandingAndWallBlockItem blockItem = (StandingAndWallBlockItem) (Object) this;
-		if (blockItem instanceof BannerItem bannerItem) {
-			blockState = this.wallBlock.getStateForPlacement(context);
-
-			BlockState blockState3 = direction == Direction.UP ? this.getBlock().getStateForPlacement(context) : blockState;
-			if (blockState3 != null && blockState3.canSurvive(worldView, blockPos)) {
-				cir.setReturnValue(blockState3 != null && worldView.isUnobstructed(blockState3, blockPos, CollisionContext.empty()) ? blockState3 : null);
-			}
-
-		}
-
-	}
+//	@Inject(method = "getPlacementState", locals = LocalCapture.CAPTURE_FAILSOFT, at = @At(value = "FIELD", target = "Lnet/minecraft/core/Direction;UP:Lnet/minecraft/core/Direction;"), cancellable = true)
+//	private void getPlacementState(BlockPlaceContext context, CallbackInfoReturnable<BlockState> cir, BlockState blockState, LevelReader worldView, BlockPos blockPos, Direction[] directions, int i, int i1) {
+//
+//		if (!MBFOptions.HANGING_BANNERS.getBooleanValue()) {
+//			return;
+//		}
+//
+//		Direction direction = directions[i1];
+//		if (direction != Direction.UP) return;
+//
+//		StandingAndWallBlockItem blockItem = (StandingAndWallBlockItem) (Object) this;
+//		if (blockItem instanceof BannerItem bannerItem) {
+//			blockState = this.wallBlock.getStateForPlacement(context);
+//
+//			BlockState blockState3 = direction == Direction.UP ? this.getBlock().getStateForPlacement(context) : blockState;
+//			if (blockState3 != null && blockState3.canSurvive(worldView, blockPos)) {
+//				cir.setReturnValue(blockState3 != null && worldView.isUnobstructed(blockState3, blockPos, CollisionContext.empty()) ? blockState3 : null);
+//			}
+//
+//		}
+//
+//	}
 
 }

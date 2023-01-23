@@ -1,8 +1,12 @@
 package de.kxmischesdomi.morebannerfeatures.utils;
 
+import java.util.List;
+import java.util.function.Function;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
+
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BannerRenderer;
@@ -17,9 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BannerBlockEntity;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.List;
-import java.util.function.Function;
 
 /**
  * @author KxmischesDomi | https://github.com/kxmischesdomi
@@ -44,7 +45,7 @@ public class RendererUtils {
 	public static void modifyMatricesFreezing(PoseStack matrices, Entity entity, boolean freezing) {
 		if (freezing) {
 			float yaw = (float) (Math.cos((double) entity.tickCount * 3.25D) * 3.141592653589793D * 0.4000000059604645D);
-			matrices.mulPose(Vector3f.YP.rotationDegrees(yaw));
+			matrices.mulPose(Axis.YP.rotationDegrees(yaw));
 		}
 	}
 

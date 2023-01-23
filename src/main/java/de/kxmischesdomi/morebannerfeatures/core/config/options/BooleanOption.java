@@ -2,6 +2,9 @@ package de.kxmischesdomi.morebannerfeatures.core.config.options;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -51,7 +54,7 @@ public class BooleanOption implements IOption {
 	@Override
 	public Object toOption() {
 		if (tooltip != null) {
-			return net.minecraft.client.OptionInstance.createBoolean("mbf.options." + key, minecraft -> aBoolean -> minecraft.font.split(tooltip, 200), value, newValue -> {
+			return net.minecraft.client.OptionInstance.createBoolean("mbf.options." + key, aBoolean -> Tooltip.create(tooltip), value, newValue -> {
 				this.value = newValue;
 			});
 		} else {
